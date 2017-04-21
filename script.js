@@ -31,8 +31,7 @@ require(['jQuery320'], function (jQuery320) {
     '</div>' +
     '</li>' +
     '</ul>' +
-    '</section>' +
-    '<div id="gallery"><img src="http://javascriptbook.com/code/c12/img/p1.jpg" data-tags="Photographers, Filmmakers" alt="Sea" /></div>'
+    '</section>' 
   );
   //JS
 
@@ -58,7 +57,7 @@ require(['jQuery320'], function (jQuery320) {
   $li.each(function () {                 // For each image
     cache.push({                          // Add an object to the cache array
       element: this,                      // This image
-      text: this.alt.trim().toLowerCase() // Its alt text (lowercase trimmed)
+      text: this.outerText.trim().toLowerCase() // Its alt text (lowercase trimmed)
     });
   });
   function filter() {                     // Declare filter() function
@@ -70,7 +69,7 @@ require(['jQuery320'], function (jQuery320) {
         index = p.text.indexOf(query);  // Find if query text is in there
       }
 
-      img.element.style.display = index === -1 ? 'none' : '';  // Show / hide
+      p.element.style.display = index === -1 ? 'none' : '';  // Show / hide
     });
   }
   if ('oninput' in $search[0]) {          // If browser supports input event
@@ -78,6 +77,6 @@ require(['jQuery320'], function (jQuery320) {
   } else {                                // Otherwise
     $search.on('keyup', filter);          // Use keyup event to call filter()
   }
-});
+})();
 
 
