@@ -21,7 +21,7 @@ require(['jQuery320'], function (jQuery320) {
     '<li>' +
     '<button class="accordion-control">Panel2</button>' +
     '<div class="accordion-panel">' +
-    ' <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>' +
+    '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>' +
     '</div>' +
     '</li>' +
     '<li>' +
@@ -49,15 +49,17 @@ require(['jQuery320'], function (jQuery320) {
   }(jQuery));
 
   $('.menu').accordion(500);
+
+
 // SearchFunction
-  var $li = $('li .accordion-control');
+  var $li = $('#myUL li');
   var $search = $('#filter-search');      // Get the input element
   var cache = [];                         // Create an array called cache
 
-  $li.each(function () {                 // For each image
+  $li.each(function () {                 
     cache.push({                          // Add an object to the cache array
       element: this,                      // This image
-      text: this.outerText.trim().toLowerCase() // Its outerText (lowercase trimmed)
+      text: (this.childNodes[0].outerText + this.childNodes[1].childNodes[0].innerText).trim().toLowerCase()// Its outerText (lowercase trimmed)
     });
   });
   function filter() {                     // Declare filter() function
