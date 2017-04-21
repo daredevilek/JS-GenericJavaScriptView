@@ -34,7 +34,7 @@ require(['jQuery320'], function (jQuery320) {
     '</section>' 
   );
   //JS
-
+//AccordionFunction
   (function ($) {                                    // Use $ as variable name
     $.fn.accordion = function (speed) {        // Return the jQuery selection
       this.on('click', '.accordion-control', function (e) {
@@ -49,7 +49,7 @@ require(['jQuery320'], function (jQuery320) {
   }(jQuery));
 
   $('.menu').accordion(500);
-
+// SearchFunction
   var $li = $('li .accordion-control');
   var $search = $('#filter-search');      // Get the input element
   var cache = [];                         // Create an array called cache
