@@ -110,8 +110,8 @@ clear: left;}
 #filter-search {
   /*background-image: url('');  Add a search icon to input */
   font-family: 'Roboto', sans-serif;
-  /*background-position: 10px 12px; /* Position the search icon */
-  /*background-repeat: no-repeat; /* Do not repeat the icon image */
+  /*background-position: 10px 12px;  Position the search icon */
+  /*background-repeat: no-repeat;  Do not repeat the icon image */
   width: 100%; /* Full-width */
   font-size: 16px; /* Increase font-size */
   padding: 0.5em 0.5em 0.5em 0.7em /* Add some padding */
