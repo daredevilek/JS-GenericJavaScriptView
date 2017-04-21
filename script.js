@@ -57,7 +57,7 @@ require(['jQuery320'], function (jQuery320) {
   $li.each(function () {                 // For each image
     cache.push({                          // Add an object to the cache array
       element: this,                      // This image
-      text: this.outerText.trim().toLowerCase() // Its alt text (lowercase trimmed)
+      text: this.outerText.trim().toLowerCase() // Its outerText (lowercase trimmed)
     });
   });
   function filter() {                     // Declare filter() function
