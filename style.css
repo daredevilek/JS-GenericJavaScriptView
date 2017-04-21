@@ -1,14 +1,14 @@
-@import url(http://fonts.googleapis.com/css?family=Jacques+Francois);
-@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+/*@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans);*/
 
 body {
-background-color: #979797;
+background-color: #f5f5f5;
 color: #fff;
 margin: 0;
 padding: 0;}
 
 .page {
-max-width: 640px;
+max-width: 100%;
 margin: 0 auto 30px auto;}
 
 .panel {
@@ -34,7 +34,7 @@ overflow: hidden;}
 
 /********** TYPOGRAPHY **********/
 body, button {
-  font-family: 'Jacques Francois', serif;}
+  font-family: 'Roboto', sans-serif;}
 
 h2, h3 {
 font-weight: normal;
@@ -51,7 +51,7 @@ font-size: 90%;
 letter-spacing: 0.2em;}
 
 p {
-font-family: 'Quattrocento Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
 line-height: 1.4em;}
 
 a {
@@ -76,8 +76,8 @@ padding: 10px;}
 
 /**********  ACCORDION **********/
 .accordion, .menu {
-background-color: #f2f2f2;
-color: #666;
+background-color: #cfd8dc;
+color: #000000;
 margin: 0;
 padding: 0;
 overflow: auto;}
@@ -87,8 +87,8 @@ padding: 0;
 list-style-type: none;}
 
 .accordion-control {
-background-color: #303030;
-color: #fff;
+background-color: #81D4FA;
+color: #000000;
 display: block;
 width: 100%;
 padding: 0.5em 0.5em 0.5em 0.7em;
@@ -104,17 +104,22 @@ margin: 20px;}
 .accordion-panel img {
 display: block;
 clear: left;}
-#myInput {
+
+/*******Search Field******/
+#filter-search {
   background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  font-family: 'Roboto', sans-serif;
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 100%; /* Full-width */
+  width: 50%; /* Full-width */
   font-size: 16px; /* Increase font-size */
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
-  margin-bottom: 12px; /* Add some space below the input */
+  margin-bottom: 12px;
+  text-align: center; /* Add some space below the input */
 }
 
+/*****List View*****/
 #myUL {
   /* Remove default list styling */
   list-style-type: none;
