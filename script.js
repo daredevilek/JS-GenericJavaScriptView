@@ -13,21 +13,21 @@ require(['jQuery320'], function (jQuery320) {
     '<section class="page">' +
     '<ul class="menu" id="myUL">' +
     '<li>' +
-    '<button class="accordion-control">Classics</button>' +
+    '<button class="accordion-control">Panel1</button>' +
     '<div class="accordion-panel">' +
-    '<p>Take your tastebuds for a gentle stroll through an English garden filled with Monsieur Pigeon\'s beautifully fragrant Flower Series marshmallows. With three sweetly floral options: <strong>Elderberry</strong>, <strong>Rose Petal</strong>, and <strong>Chrysanthemum</strong> - all edible and all naturally flavored - they will have you dreaming of butterflies and birdsong in no time.</p>' +
+    '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>' +
     '</div>' +
     '</li>' +
     '<li>' +
-    '<button class="accordion-control">The Flower Series</button>' +
+    '<button class="accordion-control">Panel2</button>' +
     '<div class="accordion-panel">' +
-    ' <p>Take your tastebuds for a gentle stroll through an English garden filled with Monsieur Pigeon\'s beautifully fragrant Flower Series marshmallows. With three sweetly floral options: <strong>Elderberry</strong>, <strong>Rose Petal</strong>, and <strong>Chrysanthemum</strong> - all edible and all naturally flavored - they will have you dreaming of butterflies and birdsong in no time.</p>' +
+    ' <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>' +
     '</div>' +
     '</li>' +
     '<li>' +
-    '<button class="accordion-control">Salt o\' the Sea</button>' +
+    '<button class="accordion-control">Panel3</button>' +
     '<div class="accordion-panel">' +
-    '<p>Ahoy! If you long for a taste of organic sea salt mixed in with your sweet Monsieur Pigeon marshmallows, look no further than our Salt o\' the Sea range. Featuring two delicious flavors: <strong>Salted Caramel</strong> and <strong>Cashew Butter</strong>, this sweetly salty duo will expand your taste horizons.</p>' +
+    '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>' +
     '</div>' +
     '</li>' +
     '</ul>' +
