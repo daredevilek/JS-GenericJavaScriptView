@@ -114,7 +114,7 @@ clear: left;}
   /*background-repeat: no-repeat;  Do not repeat the icon image */
   width: 100%; /* Full-width */
   font-size: 16px; /* Increase font-size */
-  padding: 0.5em 0.5em 0.5em 0.7em /* Add some padding */
+  padding: 0.5em 0.5em 0.5em 0.7em; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
   margin-bottom: 12px;
   text-align: center; /* Add some space below the input */
