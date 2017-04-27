@@ -6,7 +6,7 @@ require.config({
 });
 
 
-require(['jQuery320'], function (jQuery320) {
+require(['jQuery320'], function () {
 
   //HTML
   $(document.body).append('<div class="content"><h1>Search</h1><div id="search"><input type="text" placeholder="filter by search" id="filter-search" /></div>' +
@@ -36,7 +36,6 @@ require(['jQuery320'], function (jQuery320) {
   );
   //JS
 //AccordionFunction
-  (function ($) {                                    // Use $ as variable name
     $.fn.accordion = function (speed) {        // Return the jQuery selection
       this.on('click', '.accordion-control', function (e) {
         e.preventDefault();
@@ -47,8 +46,7 @@ require(['jQuery320'], function (jQuery320) {
       });
       return this;                                 // Return the jQuery selection
     };
-  }(jQuery));
-
+    
   $('.menu').accordion(500);
 
 
@@ -83,7 +81,7 @@ require(['jQuery320'], function (jQuery320) {
   }
 
   function getText(element) {
-    let text = '';
+    var text = '';
 
     if (element.outerText) {
       text += element.outerText.trim() + ' ';
@@ -93,8 +91,8 @@ require(['jQuery320'], function (jQuery320) {
       text += element.innerText.trim() + ' ';
     }
 
-    for (var child of element.childNodes) {
-      text += getText(child);
+    for (var i = 0; i < element.childNodes.length; i++) {
+      text += getText(element.childNodes[i]);
     }
 
     return text;
