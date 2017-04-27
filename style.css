@@ -1,24 +1,42 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
-/*@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans);*/
 
 body {
 background-color: #f5f5f5;
-/*color: #fff;*/
 margin: 0;
-padding: 0;}
+padding: 0
+}
 
-.page {
-max-width: 100%;
-margin: 0 auto 30px auto;}
+button {
+font-size: 90%;
+margin-bottom: 12px;
+text-align: left;
+text-transform: uppercase;
+ border: 1px solid #ddd;
+}
+
+
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  padding:  1em;
+  background-color: #fff;
+  transition: box-shadow .25s;
+  border-radius: 1.5px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin: 0 auto 30px auto}
 
 .panel {
 background-color: #fff;
-color: #666;
+color: white;
 box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
 overflow: auto;}
 
-button {
-border: none;}
+
 
 /********** LOGO **********/
 h1 {
@@ -26,41 +44,42 @@ text-align: center;
 width: 200px;
 height: 100px;
 margin: 40px auto 40px auto;
-/*background-image: url('../img/logo.png');
-background-repeat: no-repeat;*/
-/*text-indent: 100%;*/
 white-space: nowrap;
-overflow: hidden;}
-
-/********** TYPOGRAPHY **********/
-body, button {
-  font-family: 'Roboto', sans-serif;}
-
+overflow: hidden
+}
 h2, h3 {
 font-weight: normal;
-margin: 0;}
+margin: 0
+}
 h2 {
 color: #666;
 text-transform: uppercase;
 letter-spacing: 0.14em;
 font-size: 230%;
 line-height: 1em;
-padding: 20px 0 0 20px;}
+padding: 20px 0 0 20px
+}
+
 h3 {
 font-size: 90%;
-letter-spacing: 0.2em;}
+letter-spacing: 0.2em
+}
 
 p {
 font-family: 'Roboto', sans-serif;
-line-height: 1.4em;}
+line-height: 1.4em
+}
 
 a {
   text-decoration: none;}
 
-button {
-font-size: 90%;
-text-align: left;
-text-transform: uppercase;}
+
+
+
+/********** TYPOGRAPHY **********/
+body, button {
+  font-family: 'Roboto', sans-serif;}
+
 
 /*****************  No JS ***************/
 #billboard {text-align: center;}
@@ -76,9 +95,9 @@ padding: 10px;}
 
 /**********  ACCORDION **********/
 .accordion, .menu {
-background-color: #cfd8dc;
+background-color: white;
 color: #000000;
-margin: 0;
+margin: 1em;
 padding: 0;
 overflow: auto;}
 
@@ -87,17 +106,19 @@ padding: 0;
 list-style-type: none;}
 
 .accordion-control {
-background-color: #81D4FA;
+background-color: whitesmoke;
 text-align:center;
 color: #000000;
 display: block;
 width: 100%;
 padding: 0.5em 0.5em 0.5em 0.7em;
 margin: 0;
+box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 border-top: 1px solid #666;}
 
 .accordion-panel {
-display: none;}
+display: none
+}
 
 .accordion-panel p {
 margin: 20px;}
@@ -108,16 +129,13 @@ clear: left;}
 
 /*******Search Field******/
 #filter-search {
-  /*background-image: url('');  Add a search icon to input */
   font-family: 'Roboto', sans-serif;
-  /*background-position: 10px 12px;  Position the search icon */
-  /*background-repeat: no-repeat;  Do not repeat the icon image */
-  width: 100%; /* Full-width */
   font-size: 16px; /* Increase font-size */
   padding: 0.5em 0.5em 0.5em 0.7em; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
   margin-bottom: 12px;
   text-align: center; /* Add some space below the input */
+ 
 }
 
 /*****List View*****/
@@ -137,6 +155,7 @@ clear: left;}
   font-size: 18px; /* Increase the font-size */
   color: black; /* Add a black text color */
   display: block; /* Make it into a block element to fill the whole list */
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
 }
 
 #myUL li a.header {
@@ -147,3 +166,4 @@ clear: left;}
 #myUL li a:hover:not(.header) {
   background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
+

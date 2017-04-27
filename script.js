@@ -9,7 +9,7 @@ require.config({
 require(['jQuery320'], function (jQuery320) {
 
   //HTML
-  $(document.body).append('<h1>Search</h1><div id="search"><input type="text" placeholder="filter by search" id="filter-search" /></div>' +
+  $(document.body).append('<div class="content"><h1>Search</h1><div id="search"><input type="text" placeholder="filter by search" id="filter-search" /></div>' +
     '<section class="page">' +
     '<ul class="menu" id="myUL">' +
     '<li>' +
@@ -31,7 +31,7 @@ require(['jQuery320'], function (jQuery320) {
     '</div>' +
     '</li>' +
     '</ul>' +
-    '</section>' 
+    '</section> </div>'
   );
   //JS
 //AccordionFunction
