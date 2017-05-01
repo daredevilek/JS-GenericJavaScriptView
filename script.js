@@ -6,7 +6,7 @@ require.config({
 });
 
 
-require(['jQuery320'], function() {
+require(['jQuery320'], function(jQuery320) {
 
     //HTML
     $(document.body).append('<div class="content"><h1>Search</h1><div id="search"><input type="text" placeholder="filter by search" id="filter-search" /></div>' +
