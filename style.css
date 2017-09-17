@@ -194,7 +194,8 @@ background-color: silver;
 }
 
 .accordion-panel {
-display: none
+display: none;
+
 }
 
 .accordion-control .material-icons{
@@ -220,5 +221,4 @@ table.sortable #th:hover {
 	padding: 4px 5px 0 0;}
 	
 	
-
 

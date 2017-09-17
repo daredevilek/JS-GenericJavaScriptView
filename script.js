@@ -209,6 +209,8 @@ var myList =
   "Has data?" : "false"
 } ]
 
+
+var organism = ((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism']);
 //Variable for JSON Data
 
 //Replacerfunction for ||
@@ -229,8 +231,8 @@ $(document.body).append('<div class="content">'+
         				'<tr>'+
         				'<td class="filter">'+
         				//Searchfield
-                '<div id="search"><input type="text" id="filter-search" placeholder="Search"/></div>'+
-        				'</td>'+
+                '<div id="search"><input type="text" id="filter-search" placeholder="Search"/></div>'+           
+                '</td>'+
         				//Filter-Button Organism
         				'<td class="filter">'+
         					'<button class="accordion-control"> Organism  <i class="material-icons">expand_more</i> </button>'+
@@ -284,18 +286,18 @@ $(document.body).append('<div class="content">'+
 //****For Loop to generate the variable HTML Code *******//
 
 for(i=0; i< myList.length;i++){
-  
+  var organism =((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism']);
  $("#data").append(
  	// Data-Tags = Data for Button-filter
  	 
  	
     //Generated Table-Content
      
-        '<tr class="RowSearch" data-tags="'+myList[i]['Organism']+'" data-tags1="'+myList[i]['Environment']+'"" data-tags2="'+myList[i]['Software']+'" >'+
+        '<tr class="RowSearch" data-tags="'+organism+'" data-tags1="'+myList[i]['Environment']+'"" data-tags2="'+myList[i]['Software']+'" >'+
             '<td id="checkbox"><input type="checkbox" class="checkbox" title="Choose a model"  name="'+myList[i]['RowID']+'"></td>'+
             '<td>'+myList[i]['Model name']+'</td>'+
             '<td>'+myList[i]['Model id']+'</td>'+
-           '<td>'+((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism'])+'</td>'+
+           '<td>'+organism+'</td>'+
              '<td>'+myList[i]['Environment']+'</td>'+
             '<td>'+myList[i]['Software']+'</td>'+
             //Dialog-Button
@@ -306,7 +308,7 @@ for(i=0; i< myList.length;i++){
 					'<tr><td class="dialog_first_col">Model name             </td><td>'+myList[i]['Model name']+'</td></tr>'+
 					'<tr><td class="dialog_first_col">Model id                           </td><td class="dialog_second_col">'+myList[i]['Model id']+'</td></tr>'+
 					'<tr><td class="dialog_first_col">Model link                         </td><td class="dialog_second_col">'+myList[i]['Model link']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Organism                           </td><td class="dialog_second_col">'+myList[i]['Organism']+'</td></tr>'+
+					'<tr><td class="dialog_first_col">Organism                           </td><td class="dialog_second_col">'+((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism'])+'</td></tr>'+
 					'<tr><td class="dialog_first_col">Organism detail                           </td><td class="dialog_second_col">'+myList[i]['Organism detail']+'</td></tr>'+
 					'<tr><td class="dialog_first_col">Environment                           </td><td class="dialog_second_col">'+myList[i]['Environment']+'</td></tr>'+
 					'<tr><td class="dialog_first_col">Environment detail                         </td><td class="dialog_second_col">'+myList[i]['Environment detail']+'</td></tr>'+
@@ -800,5 +802,76 @@ $('input').change(function(){
 
     	FLOW_VARIABLES["selectedmodel"] = JSON.stringify(list);
 });*/
+var $tr1 = $('#data tr.RowSearch');                  // Store all images
+var $buttons12 = $('#buttons12');                   // Store buttons element
+var tagged1 = {};                                // Create tagged object
+
+$tr1.each(function() {                         // Loop through images and
+  var data = this;                               // Store img in variable
+  var tags1 = $(this).data('tags1');              // Get this element's tags
+
+  if (tags1) {                                   // If the element had tags
+    tags1.split(',').forEach(function(tagName) { // Split at comma and
+      if (tagged1[tagName] == null) {            // If object doesn't have tag
+        tagged1[tagName] = [];                   // Add empty array to object
+      }
+      tagged1[tagName].push(data);                // Add the image to the array
+    });
+  }
+});
+
+
+$.each(tagged1, function(tagName) {     
+  // For each tag name
+  
+  $('<option/>', {                               // Create empty button
+    text: tagName + ' (' + tagged1[tagName].length + ')', // Add tag name
+    change: function() {                          // Add click handler
+      $(this)                                   // The button clicked on
+        .addClass('active')                      // Make clicked item active
+        .siblings()                              // Get its siblings
+        .removeClass('active');                  // Remove active from siblings
+         taggedfilter('data-tags1',tagName);                              // Show just those images
+    }
+  }).appendTo($buttons12);                         // Add to the buttons
+});
+
+condition ={};
+conditionType={};
+x=0;
+function taggedfilter(tagType,tagName){
+var filterText='';
+x++;
+var exist = false;
+var whereExist;
+for(typeIndex in conditionType){
+  if(tagType == conditionType[typeIndex]){
+    
+    exist = true;
+    whereExist = typeIndex;
+  }
+  
+}
+if(exist){
+  condition[whereExist]=tagName;
+}else{
+  conditionType[x]=tagType;
+   condition[x]=tagName;
+}
+
+ 
+for(tagX in condition){
+  //alert(condition[tagX]);                               // Hide them
+        filterText += '['+conditionType[tagX]+'="'+condition[tagX]+'"]';
+        // Find ones with this tag
+        
+}
+//alert(filterText);
+$tr1
+        .hide()
+        .filter(filterText).show();   
+
+}
         });
+        
         
