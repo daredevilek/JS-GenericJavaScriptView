@@ -1,28 +1,51 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+/***************Libraries**************/
+/*****************JQuery_UI*****************/
+/*WARNING this Library needs to be integrated into the CSS otherwise the Style of the Dialogue will removed on the Server*/
+@import url(https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css);
 
+/********************Text-Style***********************/
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+/********icon******/
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+
+/*****************Elements*******************/
 body {
-background-color: #f5f5f5;
-margin: 0;
-padding: 0
+	background-color: #f5f5f5;
+	margin: 0;
+  padding: 0;
+  min-width: 400px;
+  	font-family: 'Roboto', sans-serif;
+  	font-size: 1.1vw;
+
+}
+
+h1{
+	text-align:center;
+}
+
+p{
+	text-align: justify;
+	color:grey;
 }
 
 button {
-font-size: 90%;
-margin-bottom: 12px;
+margin-bottom: 0.5em;
+margin-right: 0.5em;
 text-align: left;
-/*text-transform: uppercase;*/
-border: 1px solid #ddd;
+border: none;
+cursor: pointer;
+box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
+
 }
 
-
+button.active {
+	background-color: #63a4ff;
+	color: #fff;
+	cursor: pointer;}
 
 .content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
   padding:  1em;
   background-color: #fff;
   transition: box-shadow .25s;
@@ -30,138 +53,173 @@ border: 1px solid #ddd;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   margin: 0 auto 30px auto}
 
-.panel {
-background-color: #fff;
-color: white;
-box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
-overflow: auto;}
+/**************Table-Style**************/
+
+thead{
+	width:100%;
+	background-color:cornflowerblue;
+	color:white;
+	}
 
 
-
-/********** LOGO **********/
-h1 {
-text-align: center;
-margin: 40px auto 40px auto;
-white-space: nowrap;
-overflow: hidden
-}
-h2, h3 {
-font-weight: normal;
-margin: 0
-}
-h2 {
-color: #666;
-text-transform: uppercase;
-letter-spacing: 0.14em;
-font-size: 230%;
-line-height: 1em;
-padding: 20px 0 0 20px
+/*************Column Size**********/
+#checkbox{
+	width: 5%;	
 }
 
-h3 {
-font-size: 90%;
-letter-spacing: 0.2em
+ #details{
+	width:10%;
+}
+#details-head{
+	width:11.38%;
+}
+thead .sortable #details{
+	width:10%;
 }
 
-p {
-font-family: 'Roboto', sans-serif;
-line-height: 1.4em
+.filter{
+	border: none;
 }
 
-a {
-  text-decoration: none;}
+
+table, td, tr {    
+	 
+    text-align: left;
+    
+}
+th .material-icons{
+	float:right;
+	font-size: 1.2vw;
+}
+
+
+/*************Generate Same TableSize ******************/
+table {
+ table-layout:fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+ th, td, tr {
+    padding: 1em; 
+}
+
+td {    
+
+    border: 1px solid #ddd;
+    
+}
+/*********DialogTableStyle******/
+
+/**********Col-Size*************/
+.dialog_first_col{
+ 	width:20%;
+}
+
+.dialog_second_col{
+	width:80%;
+}
+.dialog_third_col{
+	width:50%;
+}
 
 
 
+/*******Search Field******/
+#filter-search {
+	background-image: url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-32.png) ;
+	background-repeat: no-repeat;
+	text-indent: 20px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1em; /* Increase font-size */
+	padding: 0.5em 0.5em 0.5em 0.7em; /* Add some padding */
+	border:none; 
+	border-bottom: 1px solid #ddd; /* Add a grey border */
+	margin-bottom: 8px;
+	text-align: left; /* Add some space below the input */
+	width:100%;
+}
 
-/********** TYPOGRAPHY **********/
-body, button {
-  font-family: 'Roboto', sans-serif;}
+
+table.sortable {
+	display: table;
+	width: 100%;
+  }
+
+table.sortable thead {
+	overflow:scroll;
+	display: table;
+	table-layout: fixed;
+ /* assuming scrollbar width as 16px */
+  }
+
+  table.sortable tbody {
+	overflow: scroll;
+	overflow-x: hidden; 
+	height: 400px;
+	display: block;
+  }
+
+  table.sortable thead,
+  table.sortable tbody {
+	width: 100%;
+  }
 
 
-/*****************  No JS ***************/
-#billboard {text-align: center;}
-.js-warning {display: none;}
-
-.no-js .js-warning {
-display: block;
-border: 3px solid #fff;
-text-align: center;
-background-color: #fff;
-color: #db5391;
-padding: 10px;}
-
-/**********  ACCORDION **********/
-.accordion, .menu {
-background-color: white;
-/*color: #000000;*/
-margin: 1em;
-padding: 0;
-overflow: auto;}
-
-.accordion li {
-padding: 0;
-list-style-type: none;}
+  table.sortable tr {
+	width: 100%;
+	text-align: left;
+	display: table;
+	table-layout: fixed;
+  }
+/********** Filter_/**********  ACCORDION **********/
 
 .accordion-control {
 background-color: whitesmoke;
+border:none;
+font-size:1em;
 text-align:center;
-/*color: #000000;*/
 display: block;
 width: 100%;
+margin-bottom: 8px;
+margin-right: 8px;
 padding: 0.5em 0.5em 0.5em 0.7em;
-margin: 0;
-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-border-top: 1px solid #666;}
+margin-top: 3px;
+cursor: pointer;
+box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.accordion-control:hover{
+background-color: silver;
+	
+}
 
 .accordion-panel {
 display: none
 }
 
-.accordion-panel p {
-margin: 20px;}
-
-.accordion-panel img {
-display: block;
-clear: left;}
-
-/*******Search Field******/
-#filter-search {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px; /* Increase font-size */
-  padding: 0.5em 0.5em 0.5em 0.7em; /* Add some padding */
-  border: 1px solid #ddd; /* Add a grey border */
-  margin-bottom: 12px;
-  text-align: center; /* Add some space below the input */
- 
+.accordion-control .material-icons{
+	float:right;
+	font-size:1.2vw;
 }
+table.sortable #th:hover {
+	cursor: pointer;}
+#th.ascending, #th.descending, table.sortable #th:hover {
+	background-color: #63a4ff;
+	color: #fff;}
 
-/*****List View*****/
-#myUL {
-  /* Remove default list styling */
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+/* Arrows for table sorting */
+#th.ascending:after {
+	font-size: 60%;
+    content: '\25B2';
+    float: left;
+	padding: 4px 5px 0 0;}
+#th.descending:after {
+	font-size: 60%;
+    content: '\25BC';
+    float: left;
+	padding: 4px 5px 0 0;}
+	
+	
 
-#myUL li a {
-  border: 1px solid #ddd; /* Add a border to all links */
-  margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6; /* Grey background color */
-  padding: 12px; /* Add some padding */
-  text-decoration: none; /* Remove default text underline */
-  font-size: 18px; /* Increase the font-size */
-  /*color: black; /* Add a black text color */
-  display: block; /* Make it into a block element to fill the whole list */
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
-}
-
-#myUL li a.header {
-  background-color: #e2e2e2; /* Add a darker background color for headers */
-  cursor: default; /* Change cursor style */
-}
-
-#myUL li a:hover:not(.header) {
-  background-color: #eee; /* Add a hover effect to all links, except for headers */
-}
 
