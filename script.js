@@ -209,601 +209,348 @@ var myList =
   "Has data?" : "false"
 } ]
 
-
-var organism = ((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism']);
-//Variable for JSON Data
-
-//Replacerfunction for ||
 String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.split(search).join(replacement);
+  var target = this;
+  return target.split(search).join(replacement);
 };
 //Generated HTML                          
-$(document.body).append('<div class="content">'+
-    	//Heder
-    	'<h1>FSKX-file Model Repository</h1>'+
-    	//Small introduction
-    '<p>This workflow allows to scroll through the FSKX-file model repository. The meta data, an example of the graphical result using the default dataset and a downloadlink for the original FSKX-file are shown. If only one model is selected there is via the NEXT button an option to run the model with modified independent variable values and the result will be graphically presented as well as the possibility to download the FSKX-file including the new dataset.</p>'+
+$(document.body).append(
+//Startdialog
+'<div id="dialog" title="Basic dialog">'+
+'<h2>RAKIP Model Repository Demonstrator</h2>'+
+
+'<p>Welcome @RAKIP Model Repository and Web Service Demonstrator!</p>'+
+
+'<p>Via this portal we provide online access to the RAKIP Model Repository Demonstrator and resources linked to it. There are currently 3 dedicated services you can use:</p>'+
+'<ol>'+
+  '<li><strong>RAKIP Model Repository Demonstrator</strong> (Browse, search and execute available models)</li>'+
+  '<li><strong>Online Creation of Harmonized Models</strong> (Create FSK-ML formatted model files from your R code)</li>'+
+  '<li><strong>Upload of Harmonized Models</strong> (Upload PMF-ML and FSK-ML formatted model files into the RAKIP Model Repository)</li>'+
+'</ol>'+
+'Please consider that this project is work in progress. So far we support R models only and there are stillmissing features.'+ 
+'</div>'+
+//Navigationsmenu
+'</div>'+
+'<div class="topnav" id="myTopnav">'+
+'<h1>RAKIP Model Repository & Web Services</h1>'+
+
+'<a id="Nav1" href="https://knime.bfrlab.de/com.knime.enterprise.server/#/RAKIP_Web_Services/3._Upload_of_Harmonized_Models&&user=RAKIP&pw=RAKIP2017!&single" target="_blank">Upload of Harmonized Model<i class="material-icons">file_upload</i></a>'+
+'<a id="Nav1" href="https://knime.bfrlab.de/com.knime.enterprise.server/#/RAKIP_Web_Services/2._Online_Creation_of_Harmonized_Models&user=RAKIP&pw=RAKIP2017!&single" target="_blank">Online Creation of Harmonized Models <i class="material-icons">create</i></a>'+
+'<a id="Nav2" href="https://foodrisklabs.bfr.bund.de/rakip-web-portal/" target="_blank" style="float:right">About</a>'+
+'<a href="javascript:void(0);" style="font-size:36px;" class="icon" id="MenuIcon"><i  style="font-size:26px;"class="material-icons">menu</i></a>'+
+'</div>'+
+'<div id="mySidenav" class="sidenav">'+
+'  <a href="javascript:void(0)" class="closebtn">&times;</a>'+
+'<a id="Nav1" href="https://knime.bfrlab.de/com.knime.enterprise.server/#/RAKIP_Web_Services/2._Online_Creation_of_Harmonized_Models&user=RAKIP&pw=RAKIP2017!&single" target="_blank">Online Creation of Harmonized Models <i class="material-icons">create</i></a>'+
+'<a id="Nav1" href="https://knime.bfrlab.de/com.knime.enterprise.server/#/RAKIP_Web_Services/3._Upload_of_Harmonized_Models&&user=RAKIP&pw=RAKIP2017!&single" target="_blank">Upload of Harmonized Model<i class="material-icons">file_upload</i></a>'+
+'<a id="Nav3" href="https://foodrisklabs.bfr.bund.de/rakip-web-portal/" target="_blank" >About</a>'+
+'</div>'+
+//Content
+'<div class="content">'+
+    //Heder
+    '<h1>RAKIP Model Repository Demonstrator</h1>'+
+    //Small introduction
+  //'<p>This workflow allows to scroll through the FSKX-file model repository. The meta data, an example of the graphical result using the default dataset and a downloadlink for the original FSKX-file are shown. If only one model is selected there is via the NEXT button an option to run the model with modified independent variable values and the result will be graphically presented as well as the possibility to download the FSKX-file including the new dataset.</p>'+
 
 
-        	//Table-functionalities
-        				'<table class="filter" id="menu">'+
-        				'<tr>'+
-        				'<td class="filter">'+
-        				//Searchfield
-                '<div id="search"><input type="text" id="filter-search" placeholder="Search"/></div>'+           
-                '</td>'+
-        				//Filter-Button Organism
-        				'<td class="filter">'+
-        					'<button class="accordion-control"> Organism  <i class="material-icons">expand_more</i> </button>'+
-        					'<div class="accordion-panel">'+
-        					//The JS generated filters are included into the division-Element    
-        						'<div id="buttons"></div>'+
-        					'</div>'+
-        				'</td>'+
-        				//Filter-Button Environment
-        				'<td class="filter">'+
-        					'<button  class="accordion-control">Environment <i class="material-icons">expand_more</i></button>'+
-        					'<div class="accordion-panel">'+
-        					//The JS generated filters are included into the division-Element
-        						'<div id="buttons1"></div>'+
-        					'</div>'+
-        				'</td>'+
-        				//Filter-Button Category
-        				'<td class="filter">'+
-        					'<button class="accordion-control">Software <i class="material-icons">expand_more</i> </button>'+
-        					'<div class="accordion-panel">'+
-        					//The JS generated filters are included into the division-Element
-        					'<div id="buttons2"></div>'+
-        					'</div>'+ 
-        				'</td>'+
-        				'<td class="filter" id="Reset">'+
-        				//ResetButton goes here
-        				'</td>'+
-        			'</tr>'+
-        			
-        '</table>'+	
-        '<table class="sortable">'+
-        //Static_Table-Head
-			        '<thead>'+	
-			        	'<tr>'+
-			        		'<th id="checkbox"> </th>'+
-			     		    '<th id="th" data-sort="name">Model name <i class="material-icons">sort</i></th>'+
-			        		'<th id="th" data-sort="name">Model-ID <i class="material-icons">sort</i></th>'+
-			        		'<th id="th" data-sort="name">Organism <i class="material-icons">sort</i></th>'+
-			        		'<th id="th" data-sort="name">Environment <i class="material-icons">sort</i></th>'+
-			        		'<th id="th" data-sort="name">Software <i class="material-icons">sort</i></th>'+
-                            '<th id="details-head">Details</th>'+
-                         
-			        	'</tr>'+
-			        '</thead>'+
-	           '<tbody id="data" class"data-table"></tbody>'+
-	         '</table></div>'
-        	
-    );
- 
+        //Table-functionalities
+              '<table class="filter" id="menu">'+
+              '<tr>'+
+              '<td class="filter">'+
+              //Searchfield
+              '<div id="search"><input type="text" id="filter-search" placeholder="Search"/></div>'+
+              '</td>'+
+              //Filter-Button Organism
+              '<td class="filter">'+
+                '<button class="accordion-control"> Organism  <i class="material-icons">expand_more</i> </button>'+
+                '<div class="accordion-panel">'+
+                //The JS generated filters are included into the division-Element    
+                  '<div id="buttons"></div>'+
+                '</div>'+
+              '</td>'+
+              //Filter-Button Environment
+              '<td class="filter">'+
+                '<button  class="accordion-control">Environment <i class="material-icons">expand_more</i></button>'+
+                '<div class="accordion-panel">'+
+                //The JS generated filters are included into the division-Element
+                  '<div id="buttons1"></div>'+
+                '</div>'+
+              '</td>'+
+              //Filter-Button Category
+              '<td class="filter">'+
+                '<button class="accordion-control">Software <i class="material-icons">expand_more</i> </button>'+
+                '<div class="accordion-panel">'+
+                //The JS generated filters are included into the division-Element
+                '<div id="buttons2"></div>'+
+                '</div>'+ 
+              '</td>'+
+              '<td class="filter" id="Reset">'+
+              //ResetButton goes here
+              '</td>'+
+            '</tr>'+
+            
+      '</table>'+	
+      '<table class="sortable">'+
+      //Static_Table-Head
+            '<thead>'+	
+              '<tr>'+
+                '<th id="checkbox"> </th>'+
+                 '<th id="th" data-sort="name">Model name <i class="material-icons">sort</i></th>'+
+                '<th id="th" data-sort="name">Model-ID <i class="material-icons">sort</i></th>'+
+                '<th id="th" data-sort="name">Organism <i class="material-icons">sort</i></th>'+
+                '<th id="th" data-sort="name">Environment <i class="material-icons">sort</i></th>'+
+                '<th id="th" data-sort="name">Software <i class="material-icons">sort</i></th>'+
+                          '<th id="details-head">Details</th>'+
+                       
+              '</tr>'+
+            '</thead>'+
+           '<tbody id="data" class"data-table"></tbody>'+
+         '</table></div>'
+        
+  );
+
 
 //****For Loop to generate the variable HTML Code *******//
 
 for(i=0; i< myList.length;i++){
+var keys= Object.keys(myList[i])
+var organism =((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):"");
+var organism1 =((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism']);
+
+var contentTable ='<tr class="RowSearch" data-tags="'+organism1+'" data-tags1="'+myList[i]['Environment']+'"" data-tags2="'+myList[i]['Software']+'" >'+
+'<td id="checkbox"><input type="checkbox" class="checkbox" title="Choose a model"  name="'+myList[i]['RowID']+'"></td>'+
+'<td>'+((myList[i]['Model name']!=undefined)?myList[i]['Model name']:"")+'</td>'+
+'<td>'+((myList[i]['Model id']!=undefined)?myList[i]['Model id']:"")+'</td>'+
+'<td>'+organism+'</td>'+
+'<td>'+((myList[i]['Environment']!=undefined)?myList[i]['Environment']:"")+'</td>'+
+'<td>'+((myList[i]['Software']!=undefined)?myList[i]['Software']:"")+'</td>'+
+//Dialog-Button
+'<td id="details"><button id="opener'+i+'">Details</button>'+
+'<div id="wrapper'+i+'">';
+contentTable += '<table><tr><thead><th class="dialog_first_col">Feature</th> <th class="dialog_second_col">Value</th>  </tr></thead>';
+for(x=0; x< keys.length;x++){
+//console.log(keys[x]);
+if(keys[x]=='RowID')
+   continue;
+else if(keys[x]=='Organism'){
   var organism =((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism']);
- $("#data").append(
- 	// Data-Tags = Data for Button-filter
- 	 
- 	
-    //Generated Table-Content
-     
-        '<tr class="RowSearch" data-tags="'+organism+'" data-tags1="'+myList[i]['Environment']+'"" data-tags2="'+myList[i]['Software']+'" >'+
-            '<td id="checkbox"><input type="checkbox" class="checkbox" title="Choose a model"  name="'+myList[i]['RowID']+'"></td>'+
-            '<td>'+myList[i]['Model name']+'</td>'+
-            '<td>'+myList[i]['Model id']+'</td>'+
-           '<td>'+organism+'</td>'+
-             '<td>'+myList[i]['Environment']+'</td>'+
-            '<td>'+myList[i]['Software']+'</td>'+
-            //Dialog-Button
-            '<td id="details"><button id="opener'+i+'">Details</button>'+
-			'<div id="wrapper'+i+'">'+
-			//Dialog-Content	
-		'<table><tr><thead><th class="dialog_first_col">Feature</th> <th class="dialog_second_col">Value</th>  </tr></thead>'+
-					'<tr><td class="dialog_first_col">Model name             </td><td>'+myList[i]['Model name']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Model id                           </td><td class="dialog_second_col">'+myList[i]['Model id']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Model link                         </td><td class="dialog_second_col">'+myList[i]['Model link']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Organism                           </td><td class="dialog_second_col">'+((myList[i]['Organism']!=undefined)?myList[i]['Organism'].replaceAll("|| "+myList[i]['Environment']+""," "):myList[i]['Organism'])+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Organism detail                           </td><td class="dialog_second_col">'+myList[i]['Organism detail']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Environment                           </td><td class="dialog_second_col">'+myList[i]['Environment']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Environment detail                         </td><td class="dialog_second_col">'+myList[i]['Environment detail']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Model creator                      </td><td class="dialog_second_col">'+myList[i]['Model creator']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Software                           </td><td class="dialog_second_col">'+myList[i]['Software']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Model reference description        </td><td class="dialog_second_col">'+myList[i]['Model reference description']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Created date                       </td><td class="dialog_second_col">'+myList[i]['Created date']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Modified date                      </td><td class="dialog_second_col">'+myList[i]['Modified date']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Rights                             </td><td class="dialog_second_col">'+myList[i]['Rights']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Notes                              </td><td class="dialog_second_col">'+myList[i]['Notes']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Curation status                    </td><td class="dialog_second_col">'+myList[i]['Curation status']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Subject                            </td><td class="dialog_second_col">'+myList[i]['Subject']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Dependent variable                 </td><td class="dialog_second_col">'+myList[i]['Dependent variable']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Dependent variable unit            </td><td class="dialog_second_col">'+myList[i]['Dependent variable unit']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Dependent variable type            </td><td class="dialog_second_col">'+myList[i]['Dependent variable type']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Dependent variable min             </td><td class="dialog_second_col">'+myList[i]['Dependent variable min']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Dependent variable max             </td><td class="dialog_second_col">'+myList[i]['Dependent variable max']+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Independent variables              </td><td>'+((myList[i]['Independent variables']!=undefined)?myList[i]['Independent variables'].replaceAll("||","<br>"):myList[i]['Independent variables'])+'</td></tr>'+
-	                    '<tr><td class="dialog_first_col">Independent variable units         </td><td>'+((myList[i]['Independent variable units']!=undefined)?myList[i]['Independent variable units'].replaceAll("||","<br>"):myList[i]['Independent variable units'])+'</td></tr>'+
-	                    '<tr><td class="dialog_first_col">Independent variable types        </td><td>'+((myList[i]['Independent variable types']!=undefined)?myList[i]['Independent variable types'].replaceAll("||","<br>"):myList[i]['Independent variable types'])+'</td></tr>'+
-	                    '<tr><td class="dialog_first_col">Independent variable mins         </td><td>'+((myList[i]['Independent variable mins']!=undefined)?myList[i]['Independent variable mins'].replaceAll("||","<br>"):myList[i]['Independent variable mins'])+'</td></tr>'+
-	                    '<tr><td class="dialog_first_col">Independent variable maxs         </td><td>'+((myList[i]['Independent variable maxs']!=undefined)?myList[i]['Independent variable maxs'].replaceAll("||","<br>"):myList[i]['Independent variable maxs'])+'</td></tr>'+
-	                    '<tr><td class="dialog_first_col">Independent variable values         </td><td>'+((myList[i]['Independent variable values']!=undefined)?myList[i]['Independent variable values'].replaceAll("||","<br>"):myList[i]['Independent variable values'])+'</td></tr>'+
-					'<tr><td class="dialog_first_col">Has data?        					</td><td lcass="dialog_second_col"'+myList[i]['Has data?']+'</td></tr>'+
-					/*'<tr><td class="dialog_first_col">Simulation</td><td class="dialog_second_col"><img style="width:100%"src="data:image/png;base64,'+knimeDataTable.getColumn(i)+'"></td></tr>'+*/
-					'</td>'+
-        		'</tr>'+
-        		'</table>'+
-		'</td></tr>'
-		
-   
-  );       
-      
+  contentTable += ((myList[i][keys[x]]!=undefined)?'<tr><td class="dialog_first_col">'+keys[x]+'                           </td><td class="dialog_second_col">'+organism+'</td></tr>':'')
+  continue;
+}
+contentTable += ((myList[i][keys[x]]!=undefined)?'<tr><td class="dialog_first_col">'+keys[x]+'                           </td><td class="dialog_second_col">'+myList[i][keys[x]].replaceAll("||","<br>")+'</td></tr>':'')
+}
+//contentTable+='<tr><td class="dialog_first_col">Simulation</td><td class="dialog_second_col"><img style="width:100%"src="data:image/png;base64,'+knimeDataTable.getColumn(i)+'"></td></tr></td>'+
+'</tr>'+
+'</table>'+
+'</td></tr>';
+$("#data").append(contentTable);
+ 
+       
+    
 }
 
 //************************************************************JS********************************************************************************************//
+//Start Dialog
+$( function() {
+$( "#dialog" ).dialog(
+  {
+    autoOpen: true,
+    show: {
+      effect: "blind",
+      duration: 1000
+    },
+    title: '',
+        width: 800,
+        height: 400,
+        position: {
+                       my: 'center',
+                      at: 'center', 
+                     }
+
+});
+});
+//******************************Navigatiomenu******************************* *//
 
 
 
- //*****************AccordionFunction*********************//
+$(document).ready(function() {
+$('#MenuIcon').click(function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+ });
+ $('.closebtn').click(function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+});
+});
 
-    
-    $.fn.accordion = function(speed) { // Return the jQuery selection
-        this.on('click', '.accordion-control', function(e) {
-            e.preventDefault();
-            $(this)
-                .next('.accordion-panel')
-                .not(':animated')
-                .slideToggle(speed);
-        });
-        return this; 
-    };
+//*****************AccordionFunction*********************//
 
-    $('#menu').accordion(500);
+  
+  $.fn.accordion = function(speed) { // Return the jQuery selection
+      this.on('click', '.accordion-control', function(e) {
+          e.preventDefault();
+          $(this)
+              .next('.accordion-panel')
+              .not(':animated')
+              .slideToggle(speed);
+      });
+      return this; 
+  };
+
+  $('#menu').accordion(500);
 
 
- //**************SearchFunction*******************************//
+//**************SearchFunction*******************************//
 
- 
-    var $tr = $('#data tr.RowSearch');
-    var $search = $('#filter-search'); // Get the input element
-    var cache = []; // Create an array called cache
 
-    $tr.each(function() {
-        //console.log(getText(this));
-        cache.push({ // Add an object to the cache array
-            element: this, // This Content
-            text: getText(this).trim().toLowerCase() // Its outerText (lowercase trimmed)
-        });
-    });
+  var $tr = $('#data tr.RowSearch');
+  var $search = $('#filter-search'); // Get the input element
+  var cache = []; // Create an array called cache
 
-    function filter() { // Declare filter() function
-        var query = this.value.trim().toLowerCase(); // Get the query
-        cache.forEach(function(p) { // For each entry in cache pass image
-            var index = 0; // Set index to 0
+  $tr.each(function() {
+      //console.log(getText(this));
+      cache.push({ // Add an object to the cache array
+          element: this, // This Content
+          text: getText(this).trim().toLowerCase() // Its outerText (lowercase trimmed)
+      });
+  });
 
-            if (query) { // If there is some query text
-                index = p.text.indexOf(query); // Find if query text is in there
-            }
+  function filter() { // Declare filter() function
+      var query = this.value.trim().toLowerCase(); // Get the query
+      cache.forEach(function(p) { // For each entry in cache pass image
+          var index = 0; // Set index to 0
 
-            p.element.style.display = index === -1 ? 'none' : ''; // Show / hide
-        });
-    }
-    if ('oninput' in $search[0]) { // If browser supports input event
-        $search.on('input', filter); // Use input event to call filter()
-    } else { // Otherwise
-        $search.on('keyup', filter); // Use keyup event to call filter()
-    }
+          if (query) { // If there is some query text
+              index = p.text.indexOf(query); // Find if query text is in there
+          }
+
+          p.element.style.display = index === -1 ? 'none' : ''; // Show / hide
+      });
+  }
+  if ('oninput' in $search[0]) { // If browser supports input event
+      $search.on('input', filter); // Use input event to call filter()
+  } else { // Otherwise
+      $search.on('keyup', filter); // Use keyup event to call filter()
+  }
 
 // Contentelements for Searchfunction
-    function getText(element) {
-        var text = '';
+  function getText(element) {
+      var text = '';
 
-        if (element.outerText) {
-            text += element.outerText.trim() + ' ';
-        }
-        
-        else if (element.innerText) {
-            text += element.innerText.trim() + ' ';
-        }
+      if (element.outerText) {
+          text += element.outerText.trim() + ' ';
+      }
+      
+      else if (element.innerText) {
+          text += element.innerText.trim() + ' ';
+      }
 
-        for (var i = 0; i < element.childNodes.length; i++) {
-            text += getText(element.childNodes[i]);
-        }
+      for (var i = 0; i < element.childNodes.length; i++) {
+          text += getText(element.childNodes[i]);
+      }
 
-        return text;
-    }
+      return text;
+  }
 
-    
-  //**********************************Buttons********************************************//
+  
+//**********************************Buttons********************************************//
 
-  //*****************Reset-Button*******************//
-  var $tr = $('#data tr');                  // Store all images
-  // speichert Button Element
-  var $buttons = $('#buttons');                   // Store buttons element
-  var $Reset = $('#Reset'); 
-  //Array
-  var tagged = {};                                // Create tagged object
+//*****************Reset-Button*******************//
+var $tr = $('#data tr');                  // Store all images
+// speichert Button Element
+var $buttons = $('#buttons');                   // Store buttons element
+var $Reset = $('#Reset'); 
+//Array
+var tagged = {};                                // Create tagged object
 
 // Read the data for Reset and Button
- 
-  $tr.each(function() {                         // Loop through images and
-    var data = this;                               // Store img in variable
-    var tags = $(this).data('tags');              // Get this element's tags
 
-    if (tags) {                                   // If the element had tags
-      tags.split(',').forEach(function(tagName) { // Split at comma and
-        if (tagged[tagName] == null) {            // If object doesn't have tag
-          tagged[tagName] = [];                   // Add empty array to object
-        }
-        tagged[tagName].push(data);                // Add the image to the array
-      });
-    }
-  });
+$tr.each(function() {                         // Loop through images and
+  var data = this;                               // Store img in variable
+  var tags = $(this).data('tags');              // Get this element's tags
 
-  $('<button/>', {                                 // Create empty button
-    text: 'Reset Selection',
-     
- // Add text 'show all'                              // Make it active
-    click: function() {                            // Add onclick handler to                                 // Get the clicked on button                        // Add the class of active
-      $(this)
-      
-      $('button').removeClass('active')  
-      $tr.show();                               
-      condition ={};
-      conditionType={};
-    }
-  }).append('<i class="material-icons">refresh</i>').addClass('accordion-control').appendTo($Reset);                           // Add to buttons
+  if (tags) {                                   // If the element had tags
+    tags.split(',').forEach(function(tagName) { // Split at comma and
+      if (tagged[tagName] == null) {            // If object doesn't have tag
+        tagged[tagName] = [];                   // Add empty array to object
+      }
+      tagged[tagName].push(data);                // Add the image to the array
+    });
+  }
+});
+
+$('<button/>', {                                 // Create empty button
+  text: 'Reset Selection',
+   
+// Add text 'show all'                              // Make it active
+  click: function() {                            // Add onclick handler to                                 // Get the clicked on button                        // Add the class of active
+    $(this)
+    
+    $('button').removeClass('active')  
+    $tr.show();                               
+    condition ={};
+    conditionType={};
+  }
+}).append('<i class="material-icons">refresh</i>').addClass('accordion-control').appendTo($Reset);                           // Add to buttons
 
 //**************Button*******************//
- $.each(tagged, function(tagName) {     
-  	// For each tag name
-    
-    $('<button/>', {                               // Create empty button
-      text: tagName + ' (' + tagged[tagName].length + ')', // Add tag name
-      click: function() {                          // Add click handler
-        $(this)                                    // The button clicked on
-          .addClass('active')                      // Make clicked item active
-          .siblings()                              // Get its siblings
-          .removeClass('active');                  // Remove active from siblings
-           taggedfilter('data-tags',tagName);                              // Show just those images
-      }
-    }).appendTo($buttons);                         // Add to the buttons
-  });
+$.each(tagged, function(tagName) {     
+  // For each tag name
   
-  condition ={};
-  conditionType={};
-  x=0;
+  $('<button/>', {                               // Create empty button
+    text: tagName + ' (' + tagged[tagName].length + ')', // Add tag name
+    click: function() {                          // Add click handler
+      $(this)                                    // The button clicked on
+        .addClass('active')                      // Make clicked item active
+        .siblings()                              // Get its siblings
+        .removeClass('active');                  // Remove active from siblings
+         taggedfilter('data-tags',tagName);                              // Show just those images
+    }
+  }).appendTo($buttons);                         // Add to the buttons
+});
+
+condition ={};
+conditionType={};
+x=0;
 function taggedfilter(tagType,tagName){
-	var filterText='';
-	x++;
-	var exist = false;
-	for(type in conditionType){
-		if(tagType == conditionType[type]){
-			
-			exist = true;
-		}
-		
-	}
-	if(exist){
-		condition[type]=tagName;
-	}else{
-		conditionType[x]=tagType;
-	 	condition[x]=tagName;
-	}
-	
-	 
-	for(tagX in condition){
-		                             
-          filterText += '['+conditionType[tagX]+'="'+condition[tagX]+'"]';
-          // Find ones with this tag
-          
-	}
-	//alert(filterText);
-	$tr1
-          .hide()
-          .filter(filterText).show();   
-	
+var filterText='';
+x++;
+var exist = false;
+for(type in conditionType){
+  if(tagType == conditionType[type]){
+    
+    exist = true;
+  }
+  
+}
+if(exist){
+  condition[type]=tagName;
+}else{
+  conditionType[x]=tagType;
+   condition[x]=tagName;
 }
 
-  
+ 
+for(tagX in condition){
+                               
+        filterText += '['+conditionType[tagX]+'="'+condition[tagX]+'"]';
+        // Find ones with this tag
+        
+}
+//alert(filterText);
+$tr1
+        .hide()
+        .filter(filterText).show();   
+
+}
+
+
 
 //**************************Button1*********************//
 
 
 
 var $tr1 = $('#data tr.RowSearch');                  // Store all images
-  var $buttons1 = $('#buttons1');                   // Store buttons element
-  var tagged1 = {};                                // Create tagged object
-
-  $tr1.each(function() {                         // Loop through images and
-    var data = this;                               // Store img in variable
-    var tags1 = $(this).data('tags1');              // Get this element's tags
-
-    if (tags1) {                                   // If the element had tags
-      tags1.split(',').forEach(function(tagName) { // Split at comma and
-        if (tagged1[tagName] == null) {            // If object doesn't have tag
-          tagged1[tagName] = [];                   // Add empty array to object
-        }
-        tagged1[tagName].push(data);                // Add the image to the array
-      });
-    }
-  });
-
-
- $.each(tagged1, function(tagName) {     
-  	// For each tag name
-    
-    $('<button/>', {                               // Create empty button
-      text: tagName + ' (' + tagged1[tagName].length + ')', // Add tag name
-      click: function() {                          // Add click handler
-        $(this)                                    // The button clicked on
-          .addClass('active')                      // Make clicked item active
-          .siblings()                              // Get its siblings
-          .removeClass('active');                  // Remove active from siblings
-           taggedfilter('data-tags1',tagName);                              // Show just those images
-      }
-    }).appendTo($buttons1);                         // Add to the buttons
-  });
-  
-  condition ={};
-  conditionType={};
-  x=0;
-function taggedfilter(tagType,tagName){
-	var filterText='';
-	x++;
-	var exist = false;
-	var whereExist;
-	for(typeIndex in conditionType){
-		if(tagType == conditionType[typeIndex]){
-			
-			exist = true;
-			whereExist = typeIndex;
-		}
-		
-	}
-	if(exist){
-		condition[whereExist]=tagName;
-	}else{
-		conditionType[x]=tagType;
-	 	condition[x]=tagName;
-	}
-	
-	 
-	for(tagX in condition){
-		//alert(condition[tagX]);                               // Hide them
-          filterText += '['+conditionType[tagX]+'="'+condition[tagX]+'"]';
-          // Find ones with this tag
-          
-	}
-	//alert(filterText);
-	$tr1
-          .hide()
-          .filter(filterText).show();   
-	
-}
-
-//***************************Buttons2************************************//
-
-var $tr2 = $('#data tr');                  // Store all images
-  var $buttons2 = $('#buttons2');                   // Store buttons element
-  var tagged2 = {};                                // Create tagged object
-
-  $tr2.each(function() {                         // Loop through images and
-    var data = this;                               // Store img in variable
-    var tags2 = $(this).data('tags2');              // Get this element's tags
-
-    if (tags2) {                                   // If the element had tags
-      tags2.split(',').forEach(function(tagName) { // Split at comma and
-        if (tagged2[tagName] == null) {            // If object doesn't have tag
-          tagged2[tagName] = [];                   // Add empty array to object
-        }
-        tagged2[tagName].push(data);                // Add the image to the array
-      });
-    }
-  });
-
-$.each(tagged2, function(tagName) {     
-  	// For each tag name
-    
-    $('<button/>', {                               // Create empty button
-      text: tagName + ' (' + tagged2[tagName].length + ')', // Add tag name
-      click: function() {                          // Add click handler
-        $(this)                                    // The button clicked on
-          .addClass('active')                      // Make clicked item active
-          .siblings()                              // Get its siblings
-          .removeClass('active');                  // Remove active from siblings
-           taggedfilter('data-tags2',tagName);                              // Show just those images
-      }
-    }).appendTo($buttons2);                         // Add to the buttons
-  });
-  
-  condition ={};
-  conditionType={};
-  x=0;
-function taggedfilter(tagType,tagName){
-	var filterText='';
-	
-	var exist = false;
-	var whereExist;
-	for(type in conditionType){
-		if(tagType == conditionType[type]){
-			whereExist = type;
-			exist = true;
-		}
-		
-	}
-	if(exist){
-		condition[whereExist]=tagName;
-	}else{
-		conditionType[x]=tagType;
-	 	condition[x]=tagName;
-	 	x++;
-	}
-	
-	 
-	for(tagX in condition){
-		//alert(condition[tagX]);                               // Hide them
-          filterText += '['+conditionType[tagX]+'="'+condition[tagX]+'"]';
-          // Find ones with this tag
-          
-	}
-	//alert(filterText);
-	$tr1
-          .hide()
-          .filter(filterText).show();   
-	
-}
-
-
-
-
-//***********************Tooltip requires jQueryUI*************************//
- $(function() {
-    $(document).tooltip;
-  } );
-
-
-
-//*******Dialog Function*******//
-
- function builder(wrapper,opener){
- 	//Defines the Dialog
-	$('#'+wrapper).dialog({
-    autoOpen: false,
-    title: 'Model Details',
-    		width: 600,
-      	height: 400,
-        position: {
-                       my: 'center',
-                       at: 'right'
-                     }
-    	 
-});
-//ClickButton
-$('#'+opener).click(function() {
-    $('#'+wrapper).dialog('open');
-    return false;
-});
-}
-//For Loop to call the function for specific Element
-for(i=0;i< myList.length ;i++){
-	builder("wrapper"+i,"opener"+i);
-}
-//*******************Sort*******************//
-
-var compare = {                           // Declare compare object
-    name: function(a, b) {                  // Add a method called name
-      a = a.replace(/^the /i, '');          // Remove The from start of parameter
-      b = b.replace(/^the /i, '');          // Remove The from start of parameter
-  
-      if (a < b) {                          // If value a is less than value b
-        return -1;                          // Return -1
-      } else {                              // Otherwise
-        return a > b ? 1 : 0;               // If a is greater than b return 1 OR
-      }                                     // if they are the same return 0
-    },
-    duration: function(a, b) {              // Add a method called duration
-      a = a.split(':');                     // Split the time at the colon
-      b = b.split(':');                     // Split the time at the colon
-  
-      a = Number(a[0]) * 60 + Number(a[1]); // Convert the time to seconds
-      b = Number(b[0]) * 60 + Number(b[1]); // Convert the time to seconds
-  
-      return a - b;                         // Return a minus b
-    },
-    date: function(a, b) {                  // Add a method called date
-      a = new Date(a);                      // New Date object to hold the date
-      b = new Date(b);                      // New Date object to hold the date
-  
-      return a - b;                         // Return a minus b
-    }
-  };
-  
-  $('.sortable').each(function() {
-    var $table = $(this);                     // This sortable table
-    var $tbody = $table.find('tbody');        // Store table body
-    var $controls = $table.find('th');        // Store table headers
-    var rows = $tbody.find('tr').toArray();   // Store array containing rows
-  
-    $controls.on('click', function() {        // When user clicks on a header
-      var $header = $(this);                  // Get the header
-      var order = $header.data('sort');       // Get value of data-sort attribute
-      var column;                             // Declare variable called column
-  
-      // If selected item has ascending or descending class, reverse contents
-      if ($header.is('.ascending') || $header.is('.descending')) {  
-        $header.toggleClass('ascending descending');    // Toggle to other class
-        $tbody.append(rows.reverse());                // Reverse the array
-      } else {                                        // Otherwise perform a sort                            
-        $header.addClass('ascending');                // Add class to header
-        // Remove asc or desc from all other headers
-        $header.siblings().removeClass('ascending descending'); 
-        if (compare.hasOwnProperty(order)) {  // If compare object has method
-          column = $controls.index(this);         // Search for columnâ€™s index no
-  
-          rows.sort(function(a, b) {               // Call sort() on rows array
-            a = $(a).find('td').eq(column).text(); // Get text of column in row a
-            b = $(b).find('td').eq(column).text(); // Get text of column in row b
-            return compare[order](a, b);           // Call compare method
-          });
-  
-          $tbody.append(rows);
-        }
-      }
-    });
-  });
-
- 
-
-//********************Checkboxen*************************//
-
-var selectedBox = null;
-
-$(document).ready(function() {
-    $(".checkbox").click(function() {
-        selectedBox = this.name;
-
-        $(".checkbox").each(function() {
-            if ( this.name == selectedBox )
-            {
-                this.checked = true;
-            }
-            else
-            {
-                this.checked = false;
-            };        
-        });
-    alert(selectedBox);
-      });    
-});
-
-//**********Store choosen checkbox in Variable *******************//
-/*var selectedmodel = '[]';
-
-
-var checkbox = document.querySelector("input[name=checkbox]");
-
-$('input').change(function(){
-	var name = $(this).attr('name');
-
-	var list = JSON.parse(selectedmodel);
-	
-	if($(this).is(':checked')) {
-		alert(name);        
-    	} else {
-    		list = list.filter(function(value) {
-    			return value !== name;
-    		});    		
-    	}
-
-    	FLOW_VARIABLES["selectedmodel"] = JSON.stringify(list);
-});*/
-var $tr1 = $('#data tr.RowSearch');                  // Store all images
-var $buttons12 = $('#buttons12');                   // Store buttons element
+var $buttons1 = $('#buttons1');                   // Store buttons element
 var tagged1 = {};                                // Create tagged object
 
 $tr1.each(function() {                         // Loop through images and
@@ -824,16 +571,16 @@ $tr1.each(function() {                         // Loop through images and
 $.each(tagged1, function(tagName) {     
   // For each tag name
   
-  $('<option/>', {                               // Create empty button
+  $('<button/>', {                               // Create empty button
     text: tagName + ' (' + tagged1[tagName].length + ')', // Add tag name
-    change: function() {                          // Add click handler
-      $(this)                                   // The button clicked on
+    click: function() {                          // Add click handler
+      $(this)                                    // The button clicked on
         .addClass('active')                      // Make clicked item active
         .siblings()                              // Get its siblings
         .removeClass('active');                  // Remove active from siblings
          taggedfilter('data-tags1',tagName);                              // Show just those images
     }
-  }).appendTo($buttons12);                         // Add to the buttons
+  }).appendTo($buttons1);                         // Add to the buttons
 });
 
 condition ={};
@@ -872,6 +619,221 @@ $tr1
         .filter(filterText).show();   
 
 }
+
+//***************************Buttons2************************************//
+
+var $tr2 = $('#data tr');                  // Store all images
+var $buttons2 = $('#buttons2');                   // Store buttons element
+var tagged2 = {};                                // Create tagged object
+
+$tr2.each(function() {                         // Loop through images and
+  var data = this;                               // Store img in variable
+  var tags2 = $(this).data('tags2');              // Get this element's tags
+
+  if (tags2) {                                   // If the element had tags
+    tags2.split(',').forEach(function(tagName) { // Split at comma and
+      if (tagged2[tagName] == null) {            // If object doesn't have tag
+        tagged2[tagName] = [];                   // Add empty array to object
+      }
+      tagged2[tagName].push(data);                // Add the image to the array
+    });
+  }
+});
+
+$.each(tagged2, function(tagName) {     
+  // For each tag name
+  
+  $('<button/>', {                               // Create empty button
+    text: tagName + ' (' + tagged2[tagName].length + ')', // Add tag name
+    click: function() {                          // Add click handler
+      $(this)                                    // The button clicked on
+        .addClass('active')                      // Make clicked item active
+        .siblings()                              // Get its siblings
+        .removeClass('active');                  // Remove active from siblings
+         taggedfilter('data-tags2',tagName);                              // Show just those images
+    }
+  }).appendTo($buttons2);                         // Add to the buttons
+});
+
+condition ={};
+conditionType={};
+x=0;
+function taggedfilter(tagType,tagName){
+var filterText='';
+
+var exist = false;
+var whereExist;
+for(type in conditionType){
+  if(tagType == conditionType[type]){
+    whereExist = type;
+    exist = true;
+  }
+  
+}
+if(exist){
+  condition[whereExist]=tagName;
+}else{
+  conditionType[x]=tagType;
+   condition[x]=tagName;
+   x++;
+}
+
+ 
+for(tagX in condition){
+  //alert(condition[tagX]);                               // Hide them
+        filterText += '['+conditionType[tagX]+'="'+condition[tagX]+'"]';
+        // Find ones with this tag
+        
+}
+//alert(filterText);
+$tr1
+        .hide()
+        .filter(filterText).show();   
+
+}
+
+
+
+
+//***********************Tooltip requires jQueryUI*************************//
+$(function() {
+  $(document).tooltip;
+} );
+
+
+
+//*******Dialog Function*******//
+
+function builder(wrapper,opener){
+ //Defines the Dialog
+$('#'+wrapper).dialog({
+  autoOpen: false,
+  title: 'Model Details',
+      width: 600,
+      height: 400,
+      position: {
+                     my: 'center',
+                     at: 'right'
+                   }
+     
+});
+//ClickButton
+$('#'+opener).click(function() {
+  $('#'+wrapper).dialog('open');
+  return false;
+});
+}
+//For Loop to call the function for specific Element
+for(i=0;i< myList.length ;i++){
+builder("wrapper"+i,"opener"+i);
+}
+//*******************Sort*******************//
+
+var compare = {                           // Declare compare object
+  name: function(a, b) {                  // Add a method called name
+    a = a.replace(/^the /i, '');          // Remove The from start of parameter
+    b = b.replace(/^the /i, '');          // Remove The from start of parameter
+
+    if (a < b) {                          // If value a is less than value b
+      return -1;                          // Return -1
+    } else {                              // Otherwise
+      return a > b ? 1 : 0;               // If a is greater than b return 1 OR
+    }                                     // if they are the same return 0
+  },
+  duration: function(a, b) {              // Add a method called duration
+    a = a.split(':');                     // Split the time at the colon
+    b = b.split(':');                     // Split the time at the colon
+
+    a = Number(a[0]) * 60 + Number(a[1]); // Convert the time to seconds
+    b = Number(b[0]) * 60 + Number(b[1]); // Convert the time to seconds
+
+    return a - b;                         // Return a minus b
+  },
+  date: function(a, b) {                  // Add a method called date
+    a = new Date(a);                      // New Date object to hold the date
+    b = new Date(b);                      // New Date object to hold the date
+
+    return a - b;                         // Return a minus b
+  }
+};
+
+$('.sortable').each(function() {
+  var $table = $(this);                     // This sortable table
+  var $tbody = $table.find('tbody');        // Store table body
+  var $controls = $table.find('th');        // Store table headers
+  var rows = $tbody.find('tr').toArray();   // Store array containing rows
+
+  $controls.on('click', function() {        // When user clicks on a header
+    var $header = $(this);                  // Get the header
+    var order = $header.data('sort');       // Get value of data-sort attribute
+    var column;                             // Declare variable called column
+
+    // If selected item has ascending or descending class, reverse contents
+    if ($header.is('.ascending') || $header.is('.descending')) {  
+      $header.toggleClass('ascending descending');    // Toggle to other class
+      $tbody.append(rows.reverse());                // Reverse the array
+    } else {                                        // Otherwise perform a sort                            
+      $header.addClass('ascending');                // Add class to header
+      // Remove asc or desc from all other headers
+      $header.siblings().removeClass('ascending descending'); 
+      if (compare.hasOwnProperty(order)) {  // If compare object has method
+        column = $controls.index(this);         // Search for columnâ€™s index no
+
+        rows.sort(function(a, b) {               // Call sort() on rows array
+          a = $(a).find('td').eq(column).text(); // Get text of column in row a
+          b = $(b).find('td').eq(column).text(); // Get text of column in row b
+          return compare[order](a, b);           // Call compare method
         });
-        
-        
+
+        $tbody.append(rows);
+      }
+    }
+  });
+});
+
+
+
+//********************Checkboxen*************************//
+
+/*var selectedBox = null;
+
+$(document).ready(function() {
+  $(".checkbox").click(function() {
+      selectedBox = this.name;
+
+      $(".checkbox").each(function() {
+          if ( this.name == selectedBox )
+          {
+              this.checked = true;
+          }
+          else
+          {
+              this.checked = false;
+          };        
+      });
+      FLOW_VARIABLES["selectedmodel"] = selectedBox;
+  });    
+});*/
+
+//**********Store choosen checkbox in Variable *******************//
+/*FLOW_VARIABLES["selectedmodel"] = '[]';
+
+
+var checkbox = document.querySelector("input[name=checkbox]");
+
+$('input').change(function(){
+var name = $(this).attr('name');
+
+var list = JSON.parse(FLOW_VARIABLES["selectedmodel"]);
+
+if($(this).is(':checked:true') {
+  list.push(name);        
+    } else {
+      list = list.filter(function(value) {
+        return value !== name;
+      });    		
+    }
+
+    FLOW_VARIABLES["selectedmodel"] = JSON.stringify(list);
+});*/
+        });
